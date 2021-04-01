@@ -7,6 +7,7 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.Audio;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(AudioSource))]
 public class AudioPeer : MonoBehaviour
@@ -16,6 +17,7 @@ public class AudioPeer : MonoBehaviour
 	//Microphone input
 	public AudioClip _audioClip;
 	public bool _useMicrophone;
+	public Dropdown dropdown;
 	public string _selectedDevice;
 
 	//FFT values
@@ -68,6 +70,15 @@ public class AudioPeer : MonoBehaviour
 			if (Microphone.devices.Length > 0)
 			{
 				_selectedDevice = Microphone.devices[0].ToString();
+
+				for(int i = 0; i < Microphone.devices.Length; i++)
+                {
+					dropdown.options.Add(new Dropdown.OptionData(Microphone.devices[i].ToString()));
+				}
+
+				dropdown.value = 1;
+				dropdown.value = 0;
+
 				_audioSource.clip = Microphone.Start(_selectedDevice, true, 1, AudioSettings.outputSampleRate);
 				while (Microphone.GetPosition(_selectedDevice) <= 0)
 				{
@@ -82,6 +93,47 @@ public class AudioPeer : MonoBehaviour
 		if (!_useMicrophone)
 		{
 			_audioSource.clip = _audioClip;
+		}
+
+		_audioSource.Play();
+	}
+
+	public void RefreshInputDevices()
+    {
+		if (_useMicrophone)
+		{
+			if (Microphone.devices.Length > 0)
+			{
+				for (int i = 0; i < Microphone.devices.Length; i++)
+				{
+					dropdown.options.Add(new Dropdown.OptionData(Microphone.devices[i].ToString()));
+				}
+
+				dropdown.value = 0;
+			}
+			else
+			{
+				_useMicrophone = false;
+			}
+		}
+	}
+
+	public void SetAudioInput()
+    {
+		if (!_useMicrophone) { _useMicrophone = true; }
+
+		_audioBand = new float[8];
+		_audioBandBuffer = new float[8];
+		_audioBand64 = new float[64];
+		_audioBandBuffer64 = new float[64];
+		_audioSource = GetComponent<AudioSource>();
+		AudioProfile(0.5f);
+
+		_selectedDevice = Microphone.devices[dropdown.value].ToString();
+		_audioSource.clip = Microphone.Start(_selectedDevice, true, 1, AudioSettings.outputSampleRate);
+		while (Microphone.GetPosition(_selectedDevice) <= 0)
+		{
+			System.Threading.Thread.Sleep(8);
 		}
 
 		_audioSource.Play();

@@ -65,8 +65,8 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _Du: 1
-    - _Dv: 0.3031496
-    - _Feed: 0.03062992
+    - _Dv: 0.30157483
+    - _Feed: 0.03031496
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
@@ -82,7 +82,7 @@ Material:
     - _SrcBlend: 1
     - _UVSec: 0
     - _ZWrite: 1
-    - _radius: 0.23648956
+    - _radius: 0.2315296
     - _radius2: -0.2
     - _thickness: 0.024
     m_Colors:

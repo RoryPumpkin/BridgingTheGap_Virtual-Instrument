@@ -808,6 +808,14 @@
                     "expectedControlType": "MidiValue",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "ToggleUI",
+                    "type": "Button",
+                    "id": "23e72f2a-3018-4c75-8aaf-6b21ede8b5e8",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -817,8 +825,19 @@
                     "path": "<MidiDevice>/control016",
                     "interactions": "",
                     "processors": "",
-                    "groups": "MIDI Device",
+                    "groups": "MIDI Device;Keyboard&Mouse",
                     "action": "Control",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6bbccf43-f781-416a-9de6-b2620856e8c6",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "ToggleUI",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

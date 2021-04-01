@@ -5,15 +5,14 @@ using UnityEngine.UI;
 
 sealed class PlayByInputAction : MonoBehaviour
 {
-    [SerializeField] public InputAction _action = null;
+    //[SerializeField] InputAction _action = null;
+    [SerializeField] InputActionAsset actionAsset = null;
     [SerializeField] Text buttonText;
 
-    public InputAction action;
-
     RDAudioScript AudioScript;
-    float lastFeed, lastDv;
+    float lastFeed, lastDv, lastLerp;
     AudioPeer audioPeer;
-    bool checkForButton;
+    bool update;
 
     InputActionRebindingExtensions.RebindingOperation rebindOperation;
 
@@ -23,62 +22,55 @@ sealed class PlayByInputAction : MonoBehaviour
         AudioScript = FindObjectOfType<RDAudioScript>();
         AudioScript.RDUpdateShader.SetFloat("_Feed", 0.03f);
         AudioScript.RDUpdateShader.SetFloat("_Dv", 0.3f);
+        actionAsset.FindAction("Control").Enable();
     }
 
     private void Update()
     {
-        if (checkForButton)
-        {
-
-        }
-    }
-
-    void OnEnable()
-    {
-        _action.performed += OnPerformed;
-        _action.Enable();
-    }
-
-    void OnDisable()
-    {
-        Debug.Log("stop");
+        if (!update) { return; }
         AudioScript.RDUpdateShader.SetFloat("_Feed", lastFeed);
         AudioScript.RDUpdateShader.SetFloat("_Dv", lastDv);
-        _action.performed -= OnPerformed;
-        _action.Disable();
+        AudioScript.lerp = lastLerp;
     }
 
-    void OnPerformed(InputAction.CallbackContext context)
-      => SetShaderCircleRadius(context);
+    public void BindKey()
+    {
+        StartInteractiveRebind();
+    }
 
     public void SetShaderCircleRadius(InputAction.CallbackContext ctx)
     {
-        AudioScript.RDUpdateShader.SetFloat("_Feed", ctx.ReadValue<float>() * 0.04f + 0.03f);
-        lastFeed = ctx.ReadValue<float>() * 0.04f + 0.03f;
-        AudioScript.RDUpdateShader.SetFloat("_Dv", ctx.ReadValue<float>() * 0.2f + 0.3f);
-        lastDv = ctx.ReadValue<float>() * 0.2f + 0.3f;
-        AudioScript.lerp = ctx.ReadValue<float>();
+        if (ctx.performed)
+        {
+            update = false;
+            AudioScript.RDUpdateShader.SetFloat("_Feed", ctx.ReadValue<float>() * 0.04f + 0.03f);
+            AudioScript.RDUpdateShader.SetFloat("_Dv", ctx.ReadValue<float>() * 0.2f + 0.3f);
+            AudioScript.lerp = ctx.ReadValue<float>();
+
+            lastFeed = ctx.ReadValue<float>() * 0.04f + 0.03f;
+            lastDv = ctx.ReadValue<float>() * 0.2f + 0.3f;
+            lastLerp = ctx.ReadValue<float>();
+        }
+        else
+        {
+            update = true;
+        }
     }
 
-    public void StartInteractiveRebind()
+    void StartInteractiveRebind()
     {
-        OnDisable();
-        rebindOperation = _action.PerformInteractiveRebinding().OnComplete(operation => RebindCompleted());
+        actionAsset.FindAction("Control").Disable();
+        InputAction inputAction = actionAsset.FindAction("Control");
+        rebindOperation = inputAction.PerformInteractiveRebinding().OnComplete(operation => RebindCompleted());
+        rebindOperation.Start();
     }
 
     void RebindCompleted()
     {
+        buttonText.text = rebindOperation.selectedControl.ToString();
         rebindOperation.Dispose();
-    }
+        actionAsset.FindAction("Control").Enable();
 
-    public void RemapButtonClicked()
-    {
-        OnDisable();
-
-        var rebindOperation = _action.PerformInteractiveRebinding()
-                    // To avoid accidental input from mouse motion
-                    .WithControlsExcluding("Mouse")
-                    .OnMatchWaitForAnother(0.1f)
-                    .Start();
+        //Apply UI Changes (IE: New Binding Icon)
     }
 }

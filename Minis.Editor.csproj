@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{904A404B-A1FB-8ACD-93DD-3337B7D177F4}</ProjectGuid>
+    <ProjectGuid>{D5D5E91D-C496-3800-123B-A4E90F35FC3A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Minis.Editor</AssemblyName>
@@ -266,7 +266,7 @@
       <HintPath>C:/Program Files (x86)/Microsoft Visual Studio Tools for Unity/16.0/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework">
-      <HintPath>R:/Rowin Files/Documents/Unity/RDSystem-master/Library/PackageCache/com.unity.ext.nunit@1.0.6/net35/unity-custom/nunit.framework.dll</HintPath>
+      <HintPath>R:/Rowin Files/Documents/Unity/BridgingTheGap_Virtual-Instrument-main/Library/PackageCache/com.unity.ext.nunit@1.0.6/net35/unity-custom/nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.18f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/mscorlib.dll</HintPath>
@@ -623,21 +623,21 @@
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.18f1/Editor/Data/MonoBleedingEdge/lib/mono/unityscript/Boo.Lang.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.UI">
-      <HintPath>R:/Rowin Files/Documents/Unity/RDSystem-master/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+      <HintPath>R:/Rowin Files/Documents/Unity/BridgingTheGap_Virtual-Instrument-main/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
-      <HintPath>R:/Rowin Files/Documents/Unity/RDSystem-master/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+      <HintPath>R:/Rowin Files/Documents/Unity/BridgingTheGap_Virtual-Instrument-main/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.TestRunner">
-      <HintPath>R:/Rowin Files/Documents/Unity/RDSystem-master/Library/ScriptAssemblies/UnityEditor.TestRunner.dll</HintPath>
+      <HintPath>R:/Rowin Files/Documents/Unity/BridgingTheGap_Virtual-Instrument-main/Library/ScriptAssemblies/UnityEditor.TestRunner.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.TestRunner">
-      <HintPath>R:/Rowin Files/Documents/Unity/RDSystem-master/Library/ScriptAssemblies/UnityEngine.TestRunner.dll</HintPath>
+      <HintPath>R:/Rowin Files/Documents/Unity/BridgingTheGap_Virtual-Instrument-main/Library/ScriptAssemblies/UnityEngine.TestRunner.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Minis.csproj">
-      <Project>{BDF3A50C-F07D-3D6A-A9B0-3DF7D272BAB5}</Project>
+      <Project>{553E2EBA-1A44-8EA3-9ABE-9535DB55DFA6}</Project>
       <Name>Minis</Name>
     </ProjectReference>
   </ItemGroup>

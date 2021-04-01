@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8498465723693956494}
   - component: {fileID: 160077819}
   - component: {fileID: 294090596}
-  - component: {fileID: 294090597}
+  - component: {fileID: 6993228772309271041}
   m_Layer: 0
   m_Name: AudioPeer
   m_TagString: Untagged
@@ -143,8 +143,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fe8cd422cb94ce43ab84bf61b695bff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _audioClip: {fileID: 8300000, guid: b854cd3fb743c544f850e3a0f8f0f0d1, type: 3}
-  _useMicrophone: 0
+  _audioClip: {fileID: 8300000, guid: 035a5f8f85ceb194e99d88deaa6d2a02, type: 3}
+  _useMicrophone: 1
+  dropdown: {fileID: 0}
   _selectedDevice: 
   _audioBand: []
   _audioBandBuffer: []
@@ -166,13 +167,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RDUpdateShader: {fileID: 2100000, guid: 23c3dea64387b6f42b7feabf76c537af, type: 2}
-  circleStepSize: 0.01
-  midAmpScalar: 0.3
-  lowAmpScalar: 0.3
+  SurfaceShader1: {fileID: 2100000, guid: b4d3420ed8659c145912c1a2a6e8222c, type: 2}
+  SurfaceShader2: {fileID: 2100000, guid: 6282e89fdd0cd014d8d337b43b328bf2, type: 2}
+  rend: {fileID: 0}
+  circleStepSize: 0.55
+  midAmpScalar: 0.25
+  lowAmpScalar: 0.25
   Amplitude: 0
   MaxAmplitude: 0
   MinAmplitude: 0
   AvgAmplitude: 0
+  lerp: 0
 --- !u!114 &294090596
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -180,37 +185,15 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1934404580771620}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8dfbc485fa6d02f49bc5babb99827033, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _action:
-    m_Name: Action
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 3cbeacd6-252d-46cd-bfae-d4102dee6529
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 
-      m_Id: a00a6820-30a9-4e48-8637-22161e9a8a94
-      m_Path: <MidiDevice>/note048
-      m_Interactions: 
-      m_Processors: Scale(factor=0.6)
-      m_Groups: 
-      m_Action: Action
-      m_Flags: 0
-    - m_Name: 
-      m_Id: 36c27740-b22c-40d1-8bbd-2cd455f9c216
-      m_Path: <MidiDevice>/control016
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Action
-      m_Flags: 0
-  RDUpdateShader: {fileID: 2100000, guid: 23c3dea64387b6f42b7feabf76c537af, type: 2}
---- !u!114 &294090597
+  actionAsset: {fileID: -944628639613478452, guid: b423571a2c511eb4f85894604251dc8d,
+    type: 3}
+  buttonText: {fileID: 0}
+--- !u!114 &6993228772309271041
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -301,13 +284,13 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: 688eef56-bc7d-4a40-82c1-5b2e9495d806
-    m_ActionName: MIDI/Note0Key[/MidiDevice/note048]
+    m_ActionId: 650be40b-9fc9-4195-8a01-64c7d463851a
+    m_ActionName: MIDI/Control[/MidiDevice/control016]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 294090596}
-        m_MethodName: SetShaderCircleRadius
-        m_Mode: 0
+      - m_Target: {fileID: 0}
+        m_MethodName: ToggleActive
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -316,8 +299,27 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: 650be40b-9fc9-4195-8a01-64c7d463851a
-    m_ActionName: MIDI/Control[/MidiDevice/control016]
+    m_ActionId: 6b80196d-b78b-42e5-a849-7ae5e6403aaa
+    m_ActionName: UI/OpenUI[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_MethodName: ToggleActive
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 71f935eb-c0b6-457c-b56f-8b56b56925b5
+    m_ActionName: Player/ToggleUI
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 23e72f2a-3018-4c75-8aaf-6b21ede8b5e8
+    m_ActionName: MIDI/ToggleUI[/Keyboard/escape]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: MIDI
